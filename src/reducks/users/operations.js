@@ -111,3 +111,22 @@ export const signOut = () => {
     });
   };
 };
+
+export const resetPassword = (email) => {
+  return async (dispatch) => {
+    if (email === '') {
+      alert('メールアドレスの形式が不正です。');
+      return false;
+    } else {
+      return auth
+        .sendPasswordResetEmail(email)
+        .then(() => {
+          alert('入力されたアドレス宛にパスワードリセットのメールをお送りしましたのでご確認ください。');
+          dispatch(push('/signin'));
+        })
+        .catch(() => {
+          alert('登録されていないメールアドレスです。もう一度ご確認ください。');
+        });
+    }
+  };
+};
