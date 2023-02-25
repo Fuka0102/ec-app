@@ -2,28 +2,41 @@ import { push } from 'connected-react-router';
 import { signInAction } from './actions';
 import { auth, db, FirebaseTimestamp } from '../../firebase/index';
 
-export const signIn = () => {
-  return async (dispatch, getState) => {
-    const state = getState();
-    const isSignedIn = state.users.isSignedIn;
+export const signIn = (email, password) => {
+  return async (dispatch) => {
+    // VALIDATION
+    if (email === '' || password === '') {
+      alert('必須項目が未入力です');
+      return false;
+    }
 
-    if (!isSignedIn) {
-      const url = 'https://api.github.com/users/Fuka0102';
+    auth.signInWithEmailAndPassword(email, password).then((result) => {
+      const user = result.user;
 
-      const response = await fetch(url)
-        .then((res) => res.json())
-        .catch(() => null);
+      if (user) {
+        const uid = user.uid;
+        db.collection('users')
+          .doc(uid)
+          .get()
+          .then((snapshot) => {
+            const data = snapshot.data();
 
-      const username = response.login;
+            dispatch(
+              signInAction({
+                isSignedIn: true,
+                role: data.role,
+                uid: uid,
+                username: data.username,
+              })
+            );
 
-      dispatch(
-        signInAction({
-          isSignedIn: true,
-          uid: '00001',
-          username: username,
-        })
-      );
-      dispatch(push('/'));
+            dispatch(push('/'));
+          });
+      }
+    });
+  };
+};
+
 export const signUp = (username, email, password, confirmPassword) => {
   return async (dispatch) => {
     // VALIDATION
