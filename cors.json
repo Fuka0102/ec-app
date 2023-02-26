@@ -1,0 +1,8 @@
+[
+  {
+    "origin": ["https://ec-app-6d231.firebaseapp.com", "http://localhost:3000"],
+    "responseHeader": ["*"],
+    "method": ["GET"],
+    "maxAgeSeconds": 86400
+  }
+]
