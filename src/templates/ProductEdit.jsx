@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { TextInput, PrimaryButton, SelectBox } from '../components/UIkit';
 import { useDispatch } from 'react-redux';
 import { saveProduct } from '../reducks/products/operations';
-import ImageArea from '../components/products/ImageArea';
 import { db } from '../firebase';
+import { ImageArea, SetSizeArea } from '../components/products/';
 
 const ProductEdit = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,8 @@ const ProductEdit = () => {
     [category, setCategory] = useState(''),
     [gender, setGender] = useState(''),
     [images, setImages] = useState([]),
-    [price, setPrice] = useState('');
+    [price, setPrice] = useState(''),
+    [sizes, setSizes] = useState([]);
 
   const inputName = useCallback(
     (event) => {
@@ -107,6 +108,8 @@ const ProductEdit = () => {
           value={price}
           type={'number'}
         />
+        <div className='module-spacer--medium' />
+        <SetSizeArea sizes={sizes} setSizes={setSizes} />
         <div className='module-spacer--medium' />
         <div className='center'>
           <PrimaryButton
