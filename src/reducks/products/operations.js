@@ -1,7 +1,21 @@
 import { db, FirebaseTimestamp } from '../../firebase/index';
 import { push } from 'connected-react-router';
+import { fetchProductsAction } from './actions';
 
 const productsRef = db.collection('products');
+
+export const fetchProducts = () => {
+  return async (dispatch) => {
+    let productList = [];
+    productsRef.get().then((snapshots) => {
+      snapshots.forEach((snapshot) => {
+        const product = snapshot.data();
+        productList.push(product);
+      });
+      dispatch(fetchProductsAction(productList));
+    });
+  };
+};
 
 export const saveProduct = (id, name, description, category, price, gender, images) => {
   return async (dispatch) => {
