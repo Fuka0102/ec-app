@@ -5,8 +5,19 @@ import { getProductsInCart } from '../reducks/users/selectors';
 import { CartListItem } from '../components/products';
 import { PrimaryButton, GreyButton } from '../components/UIkit/';
 import { push } from 'connected-react-router';
+import { makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles({
+  root: {
+    margin: '0 auto',
+    maxWidth: 512,
+    width: '100%',
+  },
+});
 
 const CartList = () => {
+  const classes = useStyles();
+
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const productsInCart = getProductsInCart(selector);
@@ -22,7 +33,7 @@ const CartList = () => {
   return (
     <section className='c-section-wrapin'>
       <h2 className='u-text__headline'>ショッピングカート</h2>
-      <List>
+      <List className={classes.root}>
         {productsInCart.length > 0 &&
           productsInCart.map((product) => <CartListItem product={product} key={product.cartId} />)}
       </List>
