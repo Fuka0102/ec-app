@@ -30,7 +30,7 @@ export const fetchProducts = () => {
   };
 };
 
-export const saveProduct = (id, name, description, category, price, gender, images) => {
+export const saveProduct = (id, name, description, category, price, gender, images, sizes) => {
   return async (dispatch) => {
     const timestamp = FirebaseTimestamp.now();
 
@@ -41,6 +41,7 @@ export const saveProduct = (id, name, description, category, price, gender, imag
       images: images,
       name: name,
       price: parseInt(price, 10),
+      sizes: sizes,
     };
 
     if (id === '') {
