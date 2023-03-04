@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { db } from '../firebase';
 import { makeStyles } from '@material-ui/styles';
+import HTMLReactParser from 'html-react-parser';
 
 const useStyles = makeStyles((theme) => ({
   sliderBox: {
@@ -33,6 +34,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const returnCodeToBr = (text) => {
+  if (text === '') {
+    return text;
+  } else {
+    return HTMLReactParser(text.replace(/\r?|n/g, '<br/>'));
+  }
+};
+
 const ProductDetail = () => {
   const classes = useStyles();
   const selector = useSelector((state) => state);
@@ -59,6 +68,9 @@ const ProductDetail = () => {
           <div className={classes.detail}>
             <h2 className='u-text__headline'>{product.name}</h2>
             <p className={classes.price}>{product.price.toLocalString()}</p>
+            <div className='module-spacer--small'></div>
+            <div className='module-spacer--small'></div>
+            <p>{returnCodeToBr(product.description)}</p>
           </div>
         </div>
       )}
