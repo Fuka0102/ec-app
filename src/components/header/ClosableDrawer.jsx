@@ -76,36 +76,38 @@ const ClosableDrawer = (props) => {
           keepMounted: true,
         }}
       >
-        <div className={classes.searchField}>
-          <TextInput
-            fullWidth={false}
-            label={'キーワードを入力'}
-            multiline={false}
-            onChange={inputKeyword}
-            required={false}
-            minRows={1}
-            value={keyword}
-            type={'text'}
-          />
-          <IconButton>
-            <SearchIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          {menus.map((menu) => (
-            <ListItem button key={menu.id} onClick={(e) => menu.func(e, menu.value)}>
-              <ListItemIcon>{menu.icon}</ListItemIcon>
-              <ListItemText primary={menu.label} />
+        <div onClose={(e) => props.onClose(e, false)} onKeyDown={(e) => props.onClose(e, false)}>
+          <div className={classes.searchField}>
+            <TextInput
+              fullWidth={false}
+              label={'キーワードを入力'}
+              multiline={false}
+              onChange={inputKeyword}
+              required={false}
+              minRows={1}
+              value={keyword}
+              type={'text'}
+            />
+            <IconButton>
+              <SearchIcon />
+            </IconButton>
+          </div>
+          <Divider />
+          <List>
+            {menus.map((menu) => (
+              <ListItem button key={menu.id} onClick={(e) => menu.func(e, menu.value)}>
+                <ListItemIcon>{menu.icon}</ListItemIcon>
+                <ListItemText primary={menu.label} />
+              </ListItem>
+            ))}
+            <ListItem button key='logout' onClick={() => dispatch(signOut())}>
+              <ListItemIcon>
+                <ExitToAppIcon />
+              </ListItemIcon>
+              <ListItemText primary='ログアウト' />
             </ListItem>
-          ))}
-          <ListItem button key='logout' onClick={() => dispatch(signOut())}>
-            <ListItemIcon>
-              <ExitToAppIcon />
-            </ListItemIcon>
-            <ListItemText primary='ログアウト' />
-          </ListItem>
-        </List>
+          </List>
+        </div>
       </Drawer>
     </nav>
   );
