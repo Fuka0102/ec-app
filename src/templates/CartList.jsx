@@ -26,12 +26,11 @@ const CartList = () => {
         {productsInCart.length > 0 &&
           productsInCart.map((product) => <CartListItem product={product} key={product.cartId} />)}
       </List>
-      <div className='module-spacer--medium'>
-        <div className='p-grid__column'>
-          <PrimaryButton labeL={'レジへ進む'} onClick={goToOrder} />
-          <div className='module-spacer--extra-extra-small' />
-          <GreyButton labeL={'ショッピングを続ける'} onClick={backToOrder} />
-        </div>
+      <div className='module-spacer--medium' />
+      <div className='p-grid__column'>
+        <PrimaryButton label={'レジへ進む'} onClick={goToOrder} />
+        <div className='module-spacer--extra-extra-small' />
+        <GreyButton label={'ショッピングを続ける'} onClick={backToOrder} />
       </div>
     </section>
   );
