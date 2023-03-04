@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,7 +6,7 @@ import ToolBar from '@material-ui/core/ToolBar';
 import { getSignedIn } from '../../reducks/users/selectors';
 import logo from '../../assets/img/icons/logo.png';
 import { push } from 'connected-react-router';
-import { HeaderMenu } from './index';
+import { HeaderMenu, ClosableDrawer } from './index';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -32,6 +32,17 @@ const Header = (props) => {
   const selector = useSelector((state) => state);
   const isSignedIn = getSignedIn(selector);
 
+  const [open, setOpen] = useState(false);
+  const handleDrawerToggle = useCallback(
+    (event, isOpen) => {
+      if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+        return;
+      }
+      setOpen(!open);
+    },
+    [setOpen, open]
+  );
+
   return (
     <div className={classes.root}>
       <AppBar position='fixed' className={classes.menuBar}>
@@ -39,10 +50,11 @@ const Header = (props) => {
           <img src={logo} alt='ロゴ' width='48px' onClick={() => dispatch(push('/'))} />
           {isSignedIn && (
             <div className={classes.iconButtons}>
-              <HeaderMenu />
+              <HeaderMenu handleDrawerToggle={handleDrawerToggle} />
             </div>
           )}
         </ToolBar>
+        <ClosableDrawer open={open} onClose={handleDrawerToggle} />
       </AppBar>
     </div>
   );
