@@ -6,6 +6,7 @@ import ToolBar from '@material-ui/core/ToolBar';
 import { getSignedIn } from '../../reducks/users/selectors';
 import logo from '../../assets/img/icons/logo.png';
 import { push } from 'connected-react-router';
+import { HeaderMenu } from './index';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -36,6 +37,11 @@ const Header = (props) => {
       <AppBar position='fixed' className={classes.menuBar}>
         <ToolBar className={classes.toolBar}>
           <img src={logo} alt='ロゴ' width='48px' onClick={() => dispatch(push('/'))} />
+          {isSignedIn && (
+            <div className={classes.iconButtons}>
+              <HeaderMenu />
+            </div>
+          )}
         </ToolBar>
       </AppBar>
     </div>
