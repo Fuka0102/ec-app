@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import { useSelector } from 'react-redux';
-import { detUserId } from '../../reducks/users/selectors';
+import { getUserId } from '../../reducks/users/selectors';
 import { db } from '../../firebase/index';
 
 const useStyles = makeStyles((theme) => ({
