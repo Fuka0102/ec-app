@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import { useSelector } from 'react-redux';
 import ToolBar from '@material-ui/core/ToolBar';
 import { getSignedIn } from '../../reducks/users/selectors';
+import logo from '../../assets/img/icons/logo.png';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -31,7 +32,9 @@ const Header = (props) => {
   return (
     <div className={classes.root}>
       <AppBar position='fixed' className={classes.menuBar}>
-        <ToolBar className={classes.toolBar}></ToolBar>
+        <ToolBar className={classes.toolBar}>
+          <img src={logo} alt='ロゴ' width='48px' />
+        </ToolBar>
       </AppBar>
     </div>
   );
