@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   detail: {
+    textAlign: 'left',
     [theme.breakpoints.down('sm')]: {
       margin: '0 auto 16px auto',
       height: 320,
