@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -27,11 +27,22 @@ const useStyles = makeStyles((theme) => ({
 
 const CartListItem = (props) => {
   const classes = useStyles();
+  const selector = useSelector((state) => state);
+  const uid = getUserId(selector);
 
   const image = props.product.images[0].path;
   const name = props.product.name;
   const price = props.product.price.toLocaleString();
   const size = props.product.size;
+
+  const removeProductFromCart = (id) => {
+    return db
+      .collection('users')
+      .doc(uid)
+      .collection('cart')
+      .doc(id)
+      .delete();
+  };
 
   return (
     <>
@@ -44,7 +55,7 @@ const CartListItem = (props) => {
           <ListItemText primary={'¥' + price} />
         </div>
         <IconButton>
-          <DeleteIcon />
+          <DeleteIcon onClick={() => removeProductFromCart(props.product.cartId)} />
         </IconButton>
       </ListItem>
       <Divider />
