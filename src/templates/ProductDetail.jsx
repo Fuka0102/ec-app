@@ -45,7 +45,7 @@ const returnCodeToBr = (text) => {
 const ProductDetail = () => {
   const classes = useStyles();
   const selector = useSelector((state) => state);
-  const path = selector.router.location.pathanme;
+  const path = selector.router.location.pathname;
   const id = path.split('/product/')[1];
 
   const [product, setProduct] = useState(null);
@@ -67,7 +67,7 @@ const ProductDetail = () => {
           <div className={classes.sliderBox}></div>
           <div className={classes.detail}>
             <h2 className='u-text__headline'>{product.name}</h2>
-            <p className={classes.price}>{product.price.toLocalString()}</p>
+            <p className={classes.price}>{product.price && product.price.toLocalString}</p>
             <div className='module-spacer--small'></div>
             <div className='module-spacer--small'></div>
             <p>{returnCodeToBr(product.description)}</p>
