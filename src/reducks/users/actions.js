@@ -31,3 +31,11 @@ export const fetchProductsInCartAction = (products) => {
     payload: products,
   };
 };
+
+export const FETCH_ORDERS_HISTORY = 'FETCH_ORDERS_HISTORY';
+export const fetchOrdersHistoryAction = (history) => {
+  return {
+    type: 'FETCH_ORDERS_HISTORY',
+    payload: history,
+  };
+};

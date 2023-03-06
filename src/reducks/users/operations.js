@@ -1,5 +1,5 @@
 import { push } from 'connected-react-router';
-import { signInAction, signOutAction, fetchProductsInCartAction } from './actions';
+import { signInAction, signOutAction, fetchProductsInCartAction, fetchOrdersHistoryAction } from './actions';
 import { auth, db, FirebaseTimestamp } from '../../firebase/index';
 
 const usersRef = db.collection('users');
@@ -14,6 +14,26 @@ export const addProductToCart = (addedProduct) => {
     addedProduct['cartId'] = cartRef.id;
     await cartRef.set(addedProduct);
     dispatch(push('/'));
+  };
+};
+
+export const fetchOrdersHistory = () => {
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid;
+    const list = [];
+
+    usersRef
+      .doc(uid)
+      .collection('orders')
+      .orderBy('updated_at', 'desc')
+      .get()
+      .then((snapshots) => {
+        snapshots.forEach((snapshot) => {
+          const data = snapshot.data();
+          list.push(data);
+        });
+        dispatch(fetchOrdersHistoryAction(list));
+      });
   };
 };
 
