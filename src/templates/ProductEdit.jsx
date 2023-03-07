@@ -97,8 +97,8 @@ const ProductEdit = () => {
           value={description}
           type={'text'}
         />
-        <SelectBox label={'カテゴリー'} required={true} options={categories} select={setCategory} value={category} />
-        <SelectBox label={'性別'} required={true} options={genders} select={setGender} value={gender} />
+        <SelectBox label={'カテゴリー'} options={categories} required={true} select={setCategory} value={category} />
+        <SelectBox label={'性別'} options={genders} required={true} select={setGender} value={gender} />
         <TextInput
           fullWidth={true}
           label={'価格'}
@@ -115,7 +115,7 @@ const ProductEdit = () => {
         <div className='center'>
           <PrimaryButton
             label={'商品情報を保存'}
-            onClick={() => dispatch(saveProduct(id, name, description, category, gender, price, images, sizes))}
+            onClick={() => dispatch(saveProduct(id, name, description, category, gender, price, sizes, images))}
           />
         </div>
       </div>

@@ -105,7 +105,7 @@ export const orderProduct = (producsInCart, price) => {
   };
 };
 
-export const saveProduct = (id, name, description, category, price, gender, images, sizes) => {
+export const saveProduct = (id, name, description, category, gender, price, sizes, images) => {
   return async (dispatch) => {
     const timestamp = FirebaseTimestamp.now();
 
