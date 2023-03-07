@@ -99,7 +99,7 @@ export const orderProduct = (producsInCart, price) => {
           };
 
           orderRef.set(history);
-          dispatch(push('order/complete'));
+          dispatch(push('/order/complete'));
         })
         .catch(() => {
           alert('注文処理に失敗しました。通信環境をご確認のうえ、もう一度お試しください。');
