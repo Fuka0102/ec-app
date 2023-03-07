@@ -46,7 +46,7 @@ const ProductEdit = () => {
   const genders = [
     { id: 'all', name: '全て' },
     { id: 'male', name: 'メンズ' },
-    { id: 'femal', name: 'レディース' },
+    { id: 'female', name: 'レディース' },
   ];
 
   useEffect(() => {
