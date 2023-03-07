@@ -18,10 +18,14 @@ export const deleteProduct = (id) => {
   };
 };
 
-export const fetchProducts = () => {
+export const fetchProducts = (gender, category) => {
   return async (dispatch) => {
-    let productList = [];
-    productsRef.get().then((snapshots) => {
+    let query = productsRef;
+    query = gender !== '' ? query.where('gender', '==', gender) : query;
+    query = category !== '' ? query.where('category', '==', category) : query;
+
+    query.get().then((snapshots) => {
+      const productList = [];
       snapshots.forEach((snapshot) => {
         const product = snapshot.data();
         productList.push(product);
