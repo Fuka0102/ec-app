@@ -41,7 +41,7 @@ const returnCodeToBr = (text) => {
   if (text === '') {
     return text;
   } else {
-    return HTMLReactParser(text.replace(/\r?|n/g, '<br/>'));
+    return HTMLReactParser(text.replace(/\n/g, '<br/>'));
   }
 };
 
